@@ -2,6 +2,21 @@ from fractions import Fraction
 from sys import exit
 from math import *
 
+def f(x, eqn):
+    try:
+        value = eval(eqn)
+        return value
+    except:
+        return 'not valid'
+
+def gradient(x, eqn):
+    h = 10**(-9)
+    if f(x, eqn) == 'not valid':
+        print('THIS IS NOT A VALID EQUATION OR VALUE OF X')
+        exit()
+    else:
+        return (f(x + h, eqn) - f(x, eqn)) / h
+        
 def is_prime(number):
     '''returns True if is prime number, False if not'''
     number = int(number)
