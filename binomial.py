@@ -113,5 +113,3 @@ elif choice.startswith('t'):
         print(f'-x^{power}')
     else:
         print(f'{coeff} x^{power}')
-
-            
