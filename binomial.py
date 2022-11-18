@@ -15,6 +15,8 @@ class Input:
             x_coeff = splitted_list[0]
             x_pow = 0
 
+        if x_coeff == '-':
+            x_coeff = -1
         if x_coeff == '':
             x_coeff = 1
         if x_pow == '':
@@ -55,37 +57,36 @@ if choice.startswith('e'):
     l = []
     for r in range(0, n+1):
         l.append(find_x_term(a, b, n, r))
+    
+    first = second = third = x = ''
     for coeff, power in l:
+        if coeff < 0:
+            first = ' -  '
+            second = abs(coeff)
+        if coeff > 0:
+            first = ' +  '
+            second = coeff
         if power == 0:
+            x = ''
+            third = ''
+        if power == 1:
+            x = ' x'
+            third = ''
+        if power > 1:
+            x = ' x^'
+            third = power
+        if l.index([coeff, power]) == 0:
+            first = ''
+            second = coeff
+            x = x.strip()
+        if coeff == 1:
+            first = ''
+            second = ''
+        if coeff == -1 and power != 0:
+            second = ''
             if l.index([coeff, power]) == 0:
-                print(f'{coeff}', end=' ')
-            elif coeff > 0:
-                print(f' +  {coeff}', end=' ')
-            else:
-                print(f' -  {abs(coeff)}', end =' ')
-        
-        elif l.index([coeff, power]) == 0:
-            if coeff == 1:
-                print(f'x^{power}', end=' ')
-            else:
-                print(f'{coeff} x^{power}', end=' ')
-
-        elif power == 1:
-            if coeff > 0:
-                print(f' +  {coeff} x', end =' ')
-            else:
-                print(f' -  {abs(coeff)} x', end =' ')
-
-        elif coeff > 0:
-            if coeff == 1:
-                print(f' +  x^{power}', end=' ')
-            else:
-                print(f' +  {coeff} x^{power}', end=' ')
-
-        elif coeff < 0:
-            if coeff == 1:
-                print(f'{coeff} x^{power}', end=' ')     
-            print(f' -  {abs(coeff)} x^{power}', end=' ') 
+                second = '-'
+        print(f'{first}{second}{x}{third}', end=' ')
 
 elif choice.startswith('t'):
     print('\nFor (a + b)^n, enter the values of a, b, n, term.')
@@ -103,10 +104,14 @@ elif choice.startswith('t'):
 
     coeff, power = find_x_term(a, b, n, term-1)
     if coeff == 1:
-        print(f'x^{power}')    
-    elif power == 1:
-        print(f'{coeff} x')
+        print(f'x^{power}')  
     elif power == 0:
         print(f'{coeff}')
+    elif power == 1:
+        print(f'{coeff} x')
+    elif coeff == -1:
+        print(f'-x^{power}')
     else:
         print(f'{coeff} x^{power}')
+
+            
