@@ -1,5 +1,4 @@
 from math import sqrt
-from math import ceil
 from time import time
 
 def is_prime(number):
@@ -7,7 +6,7 @@ def is_prime(number):
     if number == 2:
         return True
     if number > 1:
-        number_sqrt = ceil(sqrt(number))
+        number_sqrt = int(sqrt(number))
         for i in range(2, number_sqrt + 1):
             if (number % i) == 0:
                 return False
